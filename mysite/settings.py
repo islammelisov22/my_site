@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 from pathlib import Path
 
+import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,7 +25,7 @@ SECRET_KEY = 'x0m3cy5tr_g6&_9u0lsmfyxo+%)-%#pj=c2n4hk97hp2$9t%44'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -118,17 +120,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATICFILES_DIRS = [BASE_DIR / 'static/']
+STATICFILES_DIRS = [BASE_DIR / 'shop/static/']
 # STATICFILES_DIRS = [str(BASE_DIR) + '/static/'] если используется os
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
+STATIC_ROOT = BASE_DIR / '/shop/static/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'shop/media'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 CART_SESSION_ID = 'cart'
+django_heroku.settings(locals())
