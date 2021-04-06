@@ -1,9 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .models import Dish
+
 from .forms import SearchForm, LoginForm, RegisterForm, EditForm
-from django.contrib.postgres.search import SearchVector
-from django.contrib.auth.models import User
+from .models import Dish, Category
+
+
+def view_category(request):
+    category_id = request.GET.get("category_id")
+    category = Category.objects.filter(id=category_id)
+    return render(request, 'category.html', {'category': category})
 
 
 def add_dish(request):
