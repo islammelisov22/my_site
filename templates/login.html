@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="static/css/style.css">
+
+</head>
+<body>
+{% extends 'index.html' %}
+{% block content %}
+    <link rel="stylesheet" href="/static/css/login.css">
+    <section class="login">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Войти</button>
+            {{ user }}
+        </form>
+    </section>
+
+{% endblock %}
+</body>
+</html>
