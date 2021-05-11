@@ -1,5 +1,6 @@
 body{
-        min-height: 95vh;
+    background: red;
+    min-height: 95vh;
 }
 body ,form {
     display: flex;

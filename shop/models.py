@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator
 from django.db import models
 
 
@@ -60,3 +61,45 @@ class Dish(models.Model):
     class Meta:
         verbose_name = "Блюдо"
         verbose_name_plural = "Блюда"
+
+
+class Cart(models.Model):
+    session_key = models.CharField(max_length=999, blank=True, default='')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    total_cost = models.PositiveIntegerField()
+
+    def __str__(self):
+        return str(self.id)
+
+    def get_total(self):
+        items = CartContent.objects.filter(cart=self.id)
+        total = 0
+        for item in items:
+            total += item.product.price * item.qty
+        return total
+
+    def get_cart_content(self):
+        return CartContent.objects.filter(cart=self.id)
+
+
+class CartContent(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+    product = models.ForeignKey(Dish, on_delete=models.CASCADE)
+    qty = models.PositiveIntegerField(null=True)
+
+
+class Kit(models.Model):
+    total_before = models.PositiveIntegerField(null=True)
+    total_after = models.PositiveIntegerField(null=True)
+    percent = models.PositiveIntegerField(null=True, validators=[MaxValueValidator(99)])
+    items = models.ManyToManyField(Dish)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Location(models.Model):
+    country = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.country

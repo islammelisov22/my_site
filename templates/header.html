@@ -1,32 +1,64 @@
-<nav class="fixed-top navbar navbar-expand-lg navbar-light bg-warning">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav w-100  text-center row">
-            <li class="nav-item col-1 align-self-start">
-                <a class="navbar-brand" href="#">Navbar</a>
-            </li>
-            <li class="nav-item active col-4">
-                <form class="form-inline my-2 my-lg-0" method="post">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Напитки</a>
+            <div class="collapse navbar-collapse">
+                <ul class=" navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Напитки</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Про нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Что-то еще</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           id="navbarDropdown" role="button">
+                            Авторизация
+                        </a>
+                        <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'login' %}">Вход <span class="badge bg-success"> {{ user }}</span></a>
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Выход</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'register' %}">Регистрация</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form action="{% url 'searchs' %}" class="d-flex" method="post">
+                    <input class="form-control me-2" name="Search" placeholder="Search" type="search">
                     {% csrf_token %}
-                    {{ form }}
-                    <label for="submit_search" class="button">&#128269;</label>
-                    <input id="submit_search" type="submit" hidden>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
-            </li>
-            <li class="nav-item col-7 text-end">
-                {% if user.is_authenticated %}
-                    <span class="text">
-                  {{ user.get_username }} | <a href="/logout">Выйти</a>
-                    </span>
-                {% else %}
-                    <span class="text">
-                    <a href="/register">Регистрация</a> | <a href="/login">Войти</a>
-                    </span>
-                {% endif %}
-            </li>
-        </ul>
-    </div>
-</nav>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="footer">
+    <nav class="footer fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+        <div class="collapse navbar-collapse">
+            <ul class=" navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Django</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
