@@ -2,8 +2,8 @@ from django.contrib.auth.models import User, Group
 from rest_framework import permissions
 from rest_framework import viewsets
 
-from rest_shop.serializers import UserSerializer, GroupSerializer, DishSerializer, CompanySerializer
-from shop.models import Dish, Company
+from rest_shop.serializers import UserSerializer, GroupSerializer, DishSerializer, CompanySerializer,CartSerializer
+from shop.models import Dish, Company, Cart
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -26,5 +26,9 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAdminUser]
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
 
 # Create your views here.

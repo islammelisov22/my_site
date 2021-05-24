@@ -1,24 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <link rel="stylesheet" href="static/css/style.css">
-
-</head>
-<body>
 {% extends 'index.html' %}
+{% load static %}
 {% block content %}
-    <link rel="stylesheet" href="/static/css/login.css">
+<body></body>
+     <link rel="stylesheet" href="{% static 'css/login.css'%} ">
     <section class="login">
-        <form action="" method="post">
+        <form method="post">
+            <h3>{{ auth_header }}</h3>
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Войти</button>
+            {{ form }}
+            <button type="submit">{{ submit_text }}</button>
+
             {{ user }}
+             <a class="btn btn-primary" href="{% url 'social:begin' 'google-oauth2' %}">
+                Login
+              </a>
         </form>
     </section>
 
 {% endblock %}
-</body>
-</html>

@@ -1,18 +1,9 @@
 body{
-background: red
-}
-body{
-        min-height: 95vh;
-}
-body ,form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+background-image:url(https://i.ytimg.com/vi/tE86VlLbqiQ/maxresdefault.jpg);
 }
 
 section {
-    background: aquamarine;
+    background: black;
     width: 400px;
     padding: 40px;
     border-radius: 10%;

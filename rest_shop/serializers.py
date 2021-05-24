@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from shop.models import Dish, Company
+from shop.models import Dish, Company, Cart, CartContent
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -51,3 +51,20 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ['url', 'name']
+
+class CartContentSerializer(serializers.ModelSerializer):
+    product = DishSerializer()
+
+    class Meta:
+        model = CartContent
+        fields = '__all__'
+
+
+class CartSerializer(serializers.ModelSerializer):
+    user = UserSerializer
+    cart_content = CartContentSerializer(source='get_cart_content', many=True)
+
+    class Meta:
+        model = Cart
+        fields = ('id', 'user', 'cart_content')
+        depth = 1

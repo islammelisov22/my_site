@@ -1,16 +1,92 @@
+div{
+ background-color: rgba(r, g, b, a);
+}
+
 body{
-background:red
+ background-color:black;
+ color:black;
+}
+.row>* {
+    flex-shrink: 0;
+    width: 40%;
+    max-width: 110%;
+    padding-right: calc(var(--bs-gutter-x)/ 2);
+    padding-left: calc(var(--bs-gutter-x)/ 2);
+    margin-top: var(--bs-gutter-y);
+    background-image:url(https://i.ytimg.com/vi/tE86VlLbqiQ/maxresdefault.jpg);
+}
+.btn {
+    color: white;
+    border-color: red;
+    background-color:black;
+    font-family:monospace;
+}
+
+
+.form-control{
+   width: 50%;
+   background-color:white;
+}
+
+.navbar-brand{
+   font-family:sans-serif;
+
 }
 
 .navbar + * {
-    margin-top: 56px;
+    margin-top: 100px;
 }
-.dish_cart img {
-    width: 120px
+
+
+#all_dishes {
+    padding-top: 50px;
 }
-@keyframes fadeout {
-    from{
-    }
-    to{
-    }
+
+
+#all_dishes .card {
+    padding-top: 10px;
+    max-width:250px;
+    margin:20px 20px;
+}
+
+#all_dishes .card .card-img{
+    width: 100%;
+    height: 170px;
+}
+
+#all_dishes .dish_qty {
+    width: 50px;
+}
+
+.card-img:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.nav-link {
+    color: #00bcd4;
+    font-family: monospace;
+}
+
+.list-group-item {
+    font-family:cursive;
+    position: relative;
+    display: block;
+    padding: .1rem 1rem;
+    text-decoration: none;
+    color:white;
+    background-image:url(https://tntmusic.ru/media/content/article@2x/2019-04-23_07-27-06__326a45de-6599-11e9-b942-b78ee8db6771.jpg);
+    border: 1px solid rgba(0,0,0,.125);
+
+
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #464545;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
 }

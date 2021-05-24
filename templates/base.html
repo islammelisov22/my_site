@@ -3,19 +3,44 @@
     {% include 'header.html' %}
     <div class="row justify-content-sm-start mx-0 ">
         {% for dish in dishes %}
-            <div class="card offset-1 col-3 mt-4 p-2">
-                <img class="card-img w-100 h-100 bg-warning" src="{{ MEDIA_URL }}{{ dish.image }}" alt="картинки нет">
+            <div class="card offset-1 col-3 mt-4 p-2" id="dish-{{ dish.id }}">
+                <img class="card-img w-100 h-100 bg-secondary" src="https://storage.vsemayki.ru/images/0/1/1838/1838119/previews/people_7_manshort_front_black_500.jpg" alt="">
                 <div class="card-body">
                     <h5 class="card-title">{{ dish.title }}</h5>
                     <p class="card-text">{{ dish.description }}</p>
-                    <a href="#" class="btn btn-primary">Перейти к блюду</a>
+                    <a href="cart/" class="btn btn-primary">Перейти к блюду</a>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">коспания: {{ dish.company }}</li>
+                    <li class="list-group-item">компания: {{ dish.company }}</li>
                     <li class="list-group-item">цена: {{ dish.price }}</li>
                     <li class="list-group-item">категории: {{ dish.get_categories }}</li>
                 </ul>
+                <form action="/cart/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="dish_id" value="{{ dish.id }}">
+                    <label>
+                        <input type="number" name="qty" value="{{ dish.id }}">
+                    </label>
+                    <button type="submit">Добавить в корзину</button>
+                </form>
             </div>
+        <div class="pagination">
+            <span class="step-links">
+                {% if dishes.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ dishes.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    page {{ dishes.number }} of {{ dishes.paginator.num_pages }}.
+                </span>
+
+                {% if dishes.has_next %}
+                    <a href="?page={{ dishes.next_page_number }}">next</a>
+                    <a href="?page={{ dishes.paginator.num_pages }}">last</a>
+                {% endif %}
+            </span>
+        </div>
         {% endfor %}
     </div>
 {% endblock %}

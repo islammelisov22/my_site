@@ -1,32 +1,126 @@
-<nav class="fixed-top navbar navbar-expand-lg navbar-light bg-warning">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav w-100  text-center row">
-            <li class="nav-item col-1 align-self-start">
-                <a class="navbar-brand" href="#">Navbar</a>
-            </li>
-            <li class="nav-item active col-4">
-                <form class="form-inline my-2 my-lg-0" method="post">
+<header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">AAMI.SHOP</a>
+          <div class="collapse navbar-collapse">
+
+
+
+          <ul class=" navbar-nav ml-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link">Главная</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="https://www.instagram.com/">Про нас</a>
+          </ul>
+
+                 <span class="text">
+
+                    <a class="nav-link" href="/register">Регистрация</a>
+               </span>
+                <a class="nav-link" href="/login">Войти</a>
+
+                <input  class="form-control" type="search" placeholder="Search" name="Search">
+                {% csrf_token %}
+                <button class="btn btn-outline-success" type="submit">Search</button>
+
+
+
+        </div>
+      </div>
+
+   </nav>
+
+</header>
+
+<div class="footer">
+    <nav class="footer fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" >
+            <ul class=" navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active"  href="#">Доставка по городу бесплатно</a>
+                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+
+                <li class="nav-item">
+                     <a class="nav-link" href="#">Телефон:+996 704 028 749</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<body>
+              <section class="py-3">
+                 <div class="container px-0px-lg-0 mt-0" >
+                <div class=" row gx-0 gx-lg-5 row-cols-2 row-cols-md-0 row-cols-xl-4 justify-content-center">
+                          <div class="col mb-0">
+                         <div class="card h-0">
+                            <!-- Sale badge-->
+                    <div class="card offset-1 col-0 mt-0 p-2" >
+                <img class="" src="https://storage.vsemayki.ru/images/0/1/1980/1980365/previews/people_1_manhoodiefull_front_black_500.jpg" alt="">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Товар:Худи</li>
+                    <li class="list-group-item">Компания: Adidas {{ dish.company }}</li>
+                    <li class="list-group-item">Цена: 1999c {{ dish.price }}</li>
+
+                </ul>
+                             <form action="/cart/" method="post">
                     {% csrf_token %}
-                    {{ form }}
-                    <label for="submit_search" class="button">&#128269;</label>
-                    <input id="submit_search" type="submit" hidden>
+                    <input type="hidden" name="dish_id" value="{{ dish.id }}">
+                    <label>
+                        <input type="number" name="qty" value="{{ dish.id }}">
+                    </label>
+
+
+
+                    <a href="cart/" class="btn btn-primary">Добавить </a>
+
+
+
                 </form>
-            </li>
-            <li class="nav-item col-7 text-end">
-                {% if user.is_authenticated %}
-                    <span class="text">
-                  {{ user.get_username }} | <a href="/logout">Выйти</a>
-                    </span>
-                {% else %}
-                    <span class="text">
-                    <a href="/register">Регистрация</a> | <a href="/login">Войти</a>
-                    </span>
-                {% endif %}
-            </li>
-        </ul>
-    </div>
-</nav>
+            </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                       <div class=" justify-content-center">
+                            <div class="col mb-0">
+                      <div class="card h-0">
+                   <div class="card offset-1 col-0 mt-0 p-2" >
+                <img class="" src="https://storage.vsemayki.ru/images/0/1/1838/1838119/previews/people_7_manshort_front_black_500.jpg" alt="">
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Товар: Футболка</li>
+                    <li class="list-group-item">Компания: Nike {{ dish.company }}</li>
+                    <li class="list-group-item">Цена: 1500c {{ dish.price }}</li>
+
+                </ul>
+                        <form action="/cart/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="dish_id" value="{{ dish.id }}">
+                    <label>
+                        <input type="number" name="qty" value="{{ dish.id }}">
+                    </label>
+                    <a href="cart/" class="btn btn-primary">Добавить </a>
+                </form>
+            </div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                            </div>
+
+
+                 </section>
+
+       <body>
+
+<div class="container">
+       {% block content %}
+       {% endblock %}
+</div>
