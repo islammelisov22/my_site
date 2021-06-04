@@ -2,15 +2,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchVector
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, redirect
 from django.views import View
-
 from .forms import SearchForm, LoginForm, RegisterForm, EditForm
 from .models import Dish, Category, Cart, CartContent, UserProfile
+from django.conf import settings
+from decimal import Decimal
+from django.shortcuts import render, redirect, get_object_or_404
+from shop.models import Dish
 
 
 class MasterView(View):
-
     def get_cart_records(self, cart=None, response=None):
         cart = self.get_cart() if cart is None else cart
         if cart is not None:
@@ -157,4 +158,30 @@ class CartView(MasterView):
         response = self.get_cart_records(cart, redirect('/#dish-{}'.format(dish.id)))
         return response
 
+
+class DeleteCartView(MasterView):
+    def remove(self, product):
+        """
+        Удаляем товар
+        """
+        product_id = str(product.id)
+        if product_id in self.cart:
+            del self.cart[product_id]
+            self.save()
+
+    def get_total_price(self):
+        # получаем общую стоимость
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def clear(self):
+        # очищаем корзину в сессии
+        del self.session[settings.CART_SESSION_ID]
+        self.save()
+
+
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Dish, id=product_id)
+    cart.remove(product)
+    return redirect('cart:cart_detail')
 # Create your views here.

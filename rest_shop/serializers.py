@@ -52,12 +52,19 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ['url', 'name']
 
+
 class CartContentSerializer(serializers.ModelSerializer):
     product = DishSerializer()
 
     class Meta:
         model = CartContent
         fields = '__all__'
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['url', 'username', 'password1', 'password2', 'email']
 
 
 class CartSerializer(serializers.ModelSerializer):

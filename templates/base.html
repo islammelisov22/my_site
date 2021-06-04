@@ -1,46 +1,65 @@
+
 {% extends 'index.html' %}
+
 {% block content %}
-    {% include 'header.html' %}
-    <div class="row justify-content-sm-start mx-0 ">
-        {% for dish in dishes %}
-            <div class="card offset-1 col-3 mt-4 p-2" id="dish-{{ dish.id }}">
-                <img class="card-img w-100 h-100 bg-secondary" src="https://storage.vsemayki.ru/images/0/1/1838/1838119/previews/people_7_manshort_front_black_500.jpg" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">{{ dish.title }}</h5>
-                    <p class="card-text">{{ dish.description }}</p>
-                    <a href="cart/" class="btn btn-primary">Перейти к блюду</a>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">компания: {{ dish.company }}</li>
-                    <li class="list-group-item">цена: {{ dish.price }}</li>
-                    <li class="list-group-item">категории: {{ dish.get_categories }}</li>
-                </ul>
-                <form action="/cart/" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="dish_id" value="{{ dish.id }}">
-                    <label>
-                        <input type="number" name="qty" value="{{ dish.id }}">
-                    </label>
-                    <button type="submit">Добавить в корзину</button>
-                </form>
-            </div>
-        <div class="pagination">
-            <span class="step-links">
-                {% if dishes.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ dishes.previous_page_number }}">previous</a>
-                {% endif %}
+{% include 'header.html' %}
 
-                <span class="current">
-                    page {{ dishes.number }} of {{ dishes.paginator.num_pages }}.
-                </span>
+<div class="row justify-content-sm-start mx-0 " >
+    {% for dish in dishes %}
+    <div class="card offset-1 col-3 mt-4 p-2" id="dish-{{ dish.id }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ dish.title }}</h5>
+            <p class="card-text">{{ dish.description }}</p>
 
-                {% if dishes.has_next %}
-                    <a href="?page={{ dishes.next_page_number }}">next</a>
-                    <a href="?page={{ dishes.paginator.num_pages }}">last</a>
-                {% endif %}
-            </span>
         </div>
-        {% endfor %}
+        <img class="" src="https://proprikol.ru/wp-content/uploads/2020/11/kartinki-piczcza-40.jpeg">
+        <ul class="list-group list-group-flush">
+
+
+            <li class="list-group-item">Компания: {{ dish.company }}</li>
+            <li class="list-group-item">Цена: {{ dish.price }}</li>
+            <li class="list-group-item">Категории: {{ dish.get_categories }}</li>
+
+        </ul>
+        <form action="/cart/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="dish_id" value="{{ dish.id }}">
+            <label>
+                <input type="number" name="qty" min="1" value="{{ dish.id }}">
+            </label>
+            <button class="btn btn-danger">Добавить в корзину</button>
+        </form>
     </div>
-{% endblock %}
+
+</div>
+
+
+
+
+
+<div class="footer">
+    <nav class="footer fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+        <div class="collapse navbar-collapse">
+            <ul class=" navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Доставка по городу бесплатно</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Контакты</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Телефон:+996 704 028 749</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</div>
+
+  {% endfor %}
+   {% endblock %}
+
+
+

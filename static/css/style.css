@@ -1,31 +1,44 @@
-div{
- background-color: rgba(r, g, b, a);
+.mt-0 {
+    margin-top: 0!important;
+    margin-left: -150px;
+}
+img, svg {
+    vertical-align: middle;
+    width: 370px;
+
+}
+body{
+background-color:#b1b1b1;
 }
 
-body{
- background-color:black;
- color:black;
+.navbar-brand{
+   font-family:sans-serif;
+
+}
+
+.navbar + * {
+    margin-top: 100px;
 }
 .row>* {
     flex-shrink: 0;
     width: 40%;
-    max-width: 110%;
+    max-width: 30%;
     padding-right: calc(var(--bs-gutter-x)/ 2);
     padding-left: calc(var(--bs-gutter-x)/ 2);
     margin-top: var(--bs-gutter-y);
-    background-image:url(https://i.ytimg.com/vi/tE86VlLbqiQ/maxresdefault.jpg);
+
 }
 .btn {
     color: white;
-    border-color: red;
-    background-color:black;
+    border-color: ffc800;
+    background-color:ffc800;
     font-family:monospace;
 }
 
 
 .form-control{
-   width: 50%;
-   background-color:white;
+   width: 30%;
+   background-color:#212529;
 }
 
 .navbar-brand{
@@ -63,30 +76,39 @@ body{
 }
 
 .nav-link {
-    color: #00bcd4;
+    color: #ffc800;
     font-family: monospace;
 }
 
 .list-group-item {
-    font-family:cursive;
+    font-family:inherit;
     position: relative;
     display: block;
     padding: .1rem 1rem;
     text-decoration: none;
-    color:white;
-    background-image:url(https://tntmusic.ru/media/content/article@2x/2019-04-23_07-27-06__326a45de-6599-11e9-b942-b78ee8db6771.jpg);
+    color:black;
+    background-color:white;
     border: 1px solid rgba(0,0,0,.125);
 
 
 }
 .card {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #464545;
+    background-color:#484848;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
+}
+
+.mt-4 {
+    margin-top: 1rem!important;
+}
+.card-title {
+    margin-bottom: .10rem;
+    color:white;
+
 }

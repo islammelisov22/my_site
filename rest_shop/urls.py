@@ -9,6 +9,7 @@ router.register(r'groups', views.GroupViewSet)
 router.register(r'companies', views.CompanyViewSet)
 router.register(r'dishes', views.DishViewSet)
 
+
 urlpatterns = [
    path('', include(router.urls)),
    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))

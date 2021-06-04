@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MaxValueValidator
 
 
 class UserProfile(models.Model):
@@ -61,6 +62,9 @@ class Dish(models.Model):
         verbose_name = "Блюдо"
         verbose_name_plural = "Блюда"
 
+    def get_model_name(self):
+        return self.__class__.__name__.lower()
+
 
 class Cart(models.Model):
     session_key = models.CharField(max_length=999, blank=True, default='')
@@ -85,3 +89,21 @@ class CartContent(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     product = models.ForeignKey(Dish, on_delete=models.CASCADE)
     qty = models.PositiveIntegerField(null=True)
+
+
+class Kit(models.Model):
+    total_before = models.PositiveIntegerField(null=True)
+    total_after = models.PositiveIntegerField(null=True)
+    percent = models.PositiveIntegerField(null=True, validators=[MaxValueValidator(99)])
+    items = models.ManyToManyField(Dish)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class Location(models.Model):
+    country = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.country
+
