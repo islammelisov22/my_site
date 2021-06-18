@@ -70,6 +70,7 @@ class Cart(models.Model):
     session_key = models.CharField(max_length=999, blank=True, default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     total_cost = models.PositiveIntegerField()
+   # final_price = models.DecimalField(max_digits=9, default=0, decimal_places=2, verbose_name='Общая цена')
 
     def __str__(self):
         return str(self.id)
